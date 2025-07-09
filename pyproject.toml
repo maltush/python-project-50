@@ -1,0 +1,19 @@
+[project]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = []
+
+
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = ""
+authors = ["Светлана <maltushw@gmail.com>"]
+packages = [{ include = "gendiff" }]
+
+[tool.poetry.scripts]
+gendiff = "gendiff.scripts.gendiff:main"
+
