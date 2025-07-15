@@ -7,7 +7,7 @@ build:
 package-install:
 	uv tool install --force dist/*.whl
 
-gendiff:
-	uv run python -m gendiff.scripts.gendiff -- …
+gendiff -h:
+	python3 gendiff/scripts/gendiff.py -h
 
 
