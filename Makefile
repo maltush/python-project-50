@@ -4,10 +4,9 @@ install:
 build:
 	uv build
 
+
+gendiff:
+	gendiff/scripts/gendiff.py -h
+
 package-install:
 	uv tool install --force dist/*.whl
-
-gendiff -h:
-	python3 gendiff/scripts/gendiff.py -h
-
-
