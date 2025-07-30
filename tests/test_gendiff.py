@@ -17,7 +17,6 @@ def test_gendiff_json():
                            "tests/test_data/file2.json")
     assert actual == expected
 
-
 # def test_gendiff_json_plain():
 #     expected = read_file("result_plain.txt")
 #     actual = gendiff("tests/test_data/file1.json",
