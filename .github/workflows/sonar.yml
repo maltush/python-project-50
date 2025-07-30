@@ -17,7 +17,8 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          projectKey: maltush_python-project-50
+          SONAR_PROJECT_KEY: maltush_python-project-50
+          SONAR_ORGANIZATION: maltush
         with:
           args: >
             -Dsonar.coverage.exclusions=tests/**
