@@ -4,9 +4,13 @@ install:
 build:
 	uv build
 
-
 gendiff:
-	gendiff/scripts/gendiff.py -h
+	uv run gendiff
 
 package-install:
-	uv tool install --force dist/*.whl
+	uv tool install --force ../dist/*.whl
+
+lint:
+	uv run ruff check gendiff
+
+.PHONY: gendiff
