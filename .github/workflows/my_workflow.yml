@@ -1,4 +1,4 @@
-name: Sonar Check
+name: Python CI
 on:
   push:
     branches:
@@ -17,10 +17,11 @@ jobs:
         uses: SonarSource/sonarqube-scan-action@v5
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          # SONAR_PROJECT_KEY: maltush_python-project-50
-          # SONAR_ORGANIZATION: maltush
         with:
           args: >
+            -Dsonar.projectKey=maltush_python-project-50
+            -Dsonar.organization=maltush
+            -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.coverage.exclusions=tests/**
             -Dsonar.exclusions=tests/**
       - name: Run linter and pytest

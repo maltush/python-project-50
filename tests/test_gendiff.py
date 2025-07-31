@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from gendiff.scripts.gendiff import gendiff
+from gendiff.scripts.gendiff import generate_diff
 
 
 def get_test_data_path(filename):
@@ -13,19 +13,19 @@ def read_file(filename):
 
 def test_gendiff_json():
     expected = read_file("result.txt")
-    actual = gendiff("tests/test_data/file1.json",
+    actual = generate_diff("tests/test_data/file1.json",
                            "tests/test_data/file2.json")
     assert actual == expected
 
 # def test_gendiff_json_plain():
 #     expected = read_file("result_plain.txt")
-#     actual = gendiff("tests/test_data/file1.json",
+#     actual = generate_diff("tests/test_data/file1.json",
 #                            "tests/test_data/file2.json", 'plain')
 #     assert actual == expected
 
 
 # def test_gendiff_json_json():
 #     expected = read_file("result_json.json")
-#     actual = gendiff("tests/test_data/file1.json",
+#     actual = generate_diff("tests/test_data/file1.json",
 #                            "tests/test_data/file2.json", 'json')
 #     assert actual == expected

@@ -32,10 +32,10 @@ def main():
     print(f'Второй файл: {args.second_file}')
     print(f'Формат: {args.format}')
 
-    print(gendiff(args.first_file, args.second_file))
+    print(generate_diff(args.first_file, args.second_file))
 
     
-def gendiff(file_path1, file_path2):
+def generate_diff(file_path1, file_path2):
     
     data1 = read_json(file_path1)
     data2 = read_json(file_path2)

@@ -15,7 +15,7 @@ lint:
 
 test:
 	uv run pytest
-	
+
 .PHONY: gendiff
 
 

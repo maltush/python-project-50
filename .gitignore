@@ -8,3 +8,4 @@ hexlet_code.egg-info
 python_project_50.egg-info
 build
 main.py
+dist/
