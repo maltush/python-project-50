@@ -20,3 +20,9 @@ print(diff)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=maltush_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=maltush_python-project-50)
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=maltush_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=maltush_python-project-50)
+
+https://asciinema.org/a/IIqkeVpc0tD2qAeeWfA2VSADh
+
+https://asciinema.org/a/86z83D5lFCJDGo5XsQDD0wHxn
+
+
