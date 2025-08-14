@@ -1,31 +1,43 @@
-from pathlib import Path
+import pytest
 
-from gendiff.scripts.gendiff import generate_diff
-
-
-def get_test_data_path(filename):
-    return Path(__file__).parent / "test_data" / filename
+from gendiff.scripts.generate_diff import generate_diff
+from gendiff.scripts.parser import read_file
 
 
-def read_file(filename):
-    return get_test_data_path(filename).read_text()
+@pytest.mark.parametrize('file_path1, file_path2, expected_result', [
+    ('tests/test_data/file1.json',
+     'tests/test_data/file2.json',
+     'tests/test_data/expected_result_json.txt'),
+    ('tests/test_data/file1.yaml',
+     'tests/test_data/file2.yaml',
+     'tests/test_data/expected_result_yaml.txt')])
+def test_generate_diff(file_path1, file_path2, expected_result):
+    diff = generate_diff(file_path1, file_path2)
+    expected = read_file(expected_result).strip()
+    assert diff.strip() == expected
 
 
-def test_gendiff_json():
-    expected = read_file("result.txt")
-    actual = generate_diff("tests/test_data/file1.json",
-                           "tests/test_data/file2.json")
-    assert actual == expected
+@pytest.mark.parametrize('file_path1, file_path2, expected_result', [
+    ('tests/test_data/file1.json',
+     'tests/test_data/file2.json',
+     'tests/test_data/expected_result_plain.txt'),
+    ('tests/test_data/file1.yaml',
+     'tests/test_data/file2.yaml',
+     'tests/test_data/expected_result_plain.txt')])
+def test_generate_diff_plain(file_path1, file_path2, expected_result):
+    diff = generate_diff(file_path1, file_path2, formatter="plain")
+    expected = read_file(expected_result).strip()
+    assert diff.strip() == expected
 
-# def test_gendiff_json_plain():
-#     expected = read_file("result_plain.txt")
-#     actual = generate_diff("tests/test_data/file1.json",
-#                            "tests/test_data/file2.json", 'plain')
-#     assert actual == expected
 
-
-# def test_gendiff_json_json():
-#     expected = read_file("result_json.json")
-#     actual = generate_diff("tests/test_data/file1.json",
-#                            "tests/test_data/file2.json", 'json')
-#     assert actual == expected
+@pytest.mark.parametrize('file_path1, file_path2, expected_result', [
+    ('tests/test_data/file1.json',
+     'tests/test_data/file2.json',
+     'tests/test_data/expected_result_json_format.txt'),
+    ('tests/test_data/file1.yaml',
+     'tests/test_data/file2.yaml',
+     'tests/test_data/expected_result_json_format.txt')])
+def test_generate_diff_json(file_path1, file_path2, expected_result):
+    diff = generate_diff(file_path1, file_path2, formatter="json")
+    expected = read_file(expected_result).strip()
+    assert diff.strip() == expected
