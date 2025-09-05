@@ -19,7 +19,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=python-project-50
+            -Dsonar.projectKey=maltush_python-project-50
             -Dsonar.organization=maltush
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.coverage.exclusions=tests/**
