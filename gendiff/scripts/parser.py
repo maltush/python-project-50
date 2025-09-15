@@ -6,21 +6,21 @@ import yaml
 
 def get_file_format(file_path):
     _, extension = os.path.splitext(file_path)
-    return extension[1:]
-
+    return extension[1:].lower()  
 
 def read_file(file_path):
-    with open(file_path) as file:
+    with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
-
+    
 
 def parse_data(data, format):
-    if format == 'json':
+    fmt = format.lower()
+    if fmt == 'json':
         return json.loads(data)
-    if format == 'yaml' or format == 'yml':
+    elif fmt in ('yaml', 'yml'):
         return yaml.safe_load(data)
-    raise ValueError(f'Unsupported file format: {format}')
-
+    else:
+        raise ValueError(f"Неподдерживаемый формат файла: {format}")
 
 def parse_data_from_file(file_path):
     data = read_file(file_path)

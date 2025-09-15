@@ -26,8 +26,8 @@ def items_modified(key, value1, value2):
     return {
         'action': 'modified',
         'name': key,
-        'new_value': value2,
-        'old_value': value1
+        'old_value': value1,
+        'new_value': value2
     }
 
 
@@ -61,6 +61,5 @@ def find_diff(data1, data2):
         else:
             diff.append(items_unchanged(key, value1))
 
-    sorted_diff = sorted(diff, key=lambda x: x['name'])
-
-    return sorted_diff
+   
+    return sorted(diff, key=lambda x: x['name'])

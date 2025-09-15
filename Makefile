@@ -5,7 +5,7 @@ build:
 	uv build
 
 gendiff:
-	uv run gendiff
+	uv sync
 
 package-install:
 	uv tool install --force ../dist/*.whl

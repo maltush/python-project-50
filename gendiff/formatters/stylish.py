@@ -1,4 +1,6 @@
 SEPARATOR = " "
+INDENT_STEP = 4
+
 ADD = '+ '
 DEL = '- '
 NONE = '  '
@@ -10,20 +12,20 @@ def format_value(value, spaces_count=2):
     if isinstance(value, bool):
         return str(value).lower()
     if isinstance(value, dict):
-        indent = SEPARATOR * (spaces_count + 4)
-        result_lines = []
+        indent = SEPARATOR * (spaces_count + INDENT_STEP)
+        lines = []
         for key, inner_value in value.items():
-            formatted_value = format_value(inner_value, spaces_count + 4)
-            result_lines.append(f"{indent}{NONE}{key}: {formatted_value}")
-        formatted_string = '\n'.join(result_lines)
-        end_indent = SEPARATOR * (spaces_count + 2)
-        return f"{{\n{formatted_string}\n{end_indent}}}"
-    return f"{value}"
+            formatted_value = format_value(inner_value, spaces_count + INDENT_STEP)
+            lines.append(f"{indent}{NONE}{key}: {formatted_value}")
+        closing_indent = SEPARATOR * (spaces_count + INDENT_STEP - 2)
+        return f"{{\n" + "\n".join(lines) + f"\n{closing_indent}}}"
+    return str(value)
 
 
 def make_stylish_diff(diff, spaces_count=2):
-    indent = SEPARATOR * spaces_count
     lines = []
+    indent = SEPARATOR * spaces_count
+    
     for item in diff:
         key = item['name']
         action = item['action']
@@ -41,12 +43,13 @@ def make_stylish_diff(diff, spaces_count=2):
         elif action == "added":
             lines.append(f"{indent}{ADD}{key}: {new_value}")
         elif action == 'nested':
-            children = make_stylish_diff(item.get("children"), spaces_count + 4)
+            children = make_stylish_diff(item.get("children"), spaces_count + INDENT_STEP)
             lines.append(f"{indent}{NONE}{key}: {children}")
-    formatted_string = '\n'.join(lines)
-    end_indent = SEPARATOR * (spaces_count - 2)
 
-    return f"{{\n{formatted_string}\n{end_indent}}}"
+
+    opening_brace = '{'
+    closing_brace = SEPARATOR * (spaces_count - 2) + '}'
+    return f"{opening_brace}\n" + "\n".join(lines) + f"\n{closing_brace}"
 
 
 def format_diff_stylish(data):

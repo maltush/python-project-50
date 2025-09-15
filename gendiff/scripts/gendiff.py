@@ -5,13 +5,15 @@ from gendiff.scripts.generate_diff import generate_diff
 
 def parser_function():
     parser = argparse.ArgumentParser(
-        description='Compares two configuration files and shows a difference.'
+        description='Compare two configuration files and display their differences.'
     )
     parser.add_argument('first_file')
     parser.add_argument('second_file')
-    parser.add_argument("-f", "--format",
-                        help='set format of output',
-                        default='stylish', type=str
+    parser.add_argument(
+        '-f', '--format',
+        default='stylish',
+        type=str,
+        help='Output format (default: stylish)'
     )
 
     return parser.parse_args()
@@ -29,4 +31,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    

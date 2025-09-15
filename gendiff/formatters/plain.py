@@ -1,14 +1,19 @@
 def format_value(value):
-    if isinstance(value, (dict, list)):
-        return '[complex value]'
-    elif value is None:
-        return 'null'
-    elif isinstance(value, bool):
-        return str(value).lower()
-    elif isinstance(value, str):
-        return f"'{value}'"
-    else:
-        return str(value)
+   
+
+    type_handlers = {
+        dict: lambda v: '[complex value]',
+        list: lambda v: '[complex value]',
+        type(None): lambda v: 'null',
+        bool: lambda v: str(v).lower(),
+        str: lambda v: f"'{v}'"
+    }
+
+    for data_type, handler in type_handlers.items():
+        if isinstance(value, data_type):
+            return handler(value)
+
+    return str(value)
 
 
 def make_plain_item(item, path=''):
@@ -18,32 +23,28 @@ def make_plain_item(item, path=''):
     old_value = format_value(item.get('old_value'))
     current_path = f"{path}.{key}" if path else key
 
-    ADD = ' was added with value: '
-    REMOVE = ' was removed'
-    UPD = ' was updated. From '
-    UPD2 = ' to '
+    messages = {
+        'added': f"Property '{current_path}' was added with value: {new_value}",
+        'deleted': f"Property '{current_path}' was removed",
+        'modified': f"Property '{current_path}' was updated. From {old_value} to {new_value}"
+    }
+
     PROP = 'Property '
 
-    if action == 'added':
-        return f"{PROP}'{current_path}'{ADD}{new_value}"
-    if action == 'deleted':
-        return f"{PROP}'{current_path}'{REMOVE}"
-    if action == 'modified':
-        return f"{PROP}'{current_path}'{UPD}{old_value}{UPD2}{new_value}"
-    if action == 'nested':
+    if action in messages:
+        return messages[action]
+    elif action == 'nested':
         children = item.get('children')
         return make_plain_diff(children, current_path)
     return None
 
 
 def make_plain_diff(diff, path=''):
-    result = []
-    for item in diff:
-        formatted_item = make_plain_item(item, path)
-        if formatted_item is not None:
-            result.append(formatted_item)
-
-    return '\n'.join(result)
+    return '\n'.join(
+        make_plain_item(item, path)
+        for item in diff
+        if make_plain_item(item, path) is not None
+    )
 
 
 def format_diff_plain(diff):
