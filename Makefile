@@ -18,9 +18,7 @@ test:
 
 test-coverage:
 	uv run pytest --cov=gendiff --cov-report=xml:coverage.xml
-
-reinstall:
-	uv tool install --force dist/*.whl
+	
 
 .PHONY: gendiff
 

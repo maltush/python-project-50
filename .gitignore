@@ -6,6 +6,6 @@ dependency_links.txt
 top_level.txt
 hexlet_code.egg-info
 python_project_50.egg-info
-main.py
 build
+main.py
 dist/
