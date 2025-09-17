@@ -15,10 +15,11 @@ def format_value(value, spaces_count=2):
         indent = SEPARATOR * (spaces_count + INDENT_STEP)
         lines = []
         for key, inner_value in value.items():
-            formatted_value = format_value(inner_value, spaces_count + INDENT_STEP)
+            formatted_value = format_value(inner_value, 
+                                           spaces_count + INDENT_STEP)
             lines.append(f"{indent}{NONE}{key}: {formatted_value}")
         closing_indent = SEPARATOR * (spaces_count + INDENT_STEP - 2)
-        return f"{{\n" + "\n".join(lines) + f"\n{closing_indent}}}"
+        return "{\n" + "\n".join(lines) + f"\n{closing_indent}}}"
     return str(value)
 
 
@@ -43,9 +44,9 @@ def make_stylish_diff(diff, spaces_count=2):
         elif action == "added":
             lines.append(f"{indent}{ADD}{key}: {new_value}")
         elif action == 'nested':
-            children = make_stylish_diff(item.get("children"), spaces_count + INDENT_STEP)
+            children = make_stylish_diff(item.get("children"), 
+                                         spaces_count + INDENT_STEP)
             lines.append(f"{indent}{NONE}{key}: {children}")
-
 
     opening_brace = '{'
     closing_brace = SEPARATOR * (spaces_count - 2) + '}'

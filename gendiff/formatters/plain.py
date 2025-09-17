@@ -1,6 +1,5 @@
 def format_value(value):
    
-
     type_handlers = {
         dict: lambda v: '[complex value]',
         list: lambda v: '[complex value]',
@@ -26,10 +25,9 @@ def make_plain_item(item, path=''):
     messages = {
         'added': f"Property '{current_path}' was added with value: {new_value}",
         'deleted': f"Property '{current_path}' was removed",
-        'modified': f"Property '{current_path}' was updated. From {old_value} to {new_value}"
+        'modified': f"""Property '{current_path}' was updated. 
+        From {old_value} to {new_value}"""
     }
-
-    PROP = 'Property '
 
     if action in messages:
         return messages[action]

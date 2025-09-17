@@ -61,5 +61,4 @@ def find_diff(data1, data2):
         else:
             diff.append(items_unchanged(key, value1))
 
-   
     return sorted(diff, key=lambda x: x['name'])

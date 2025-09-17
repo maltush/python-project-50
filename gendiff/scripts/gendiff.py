@@ -5,7 +5,8 @@ from gendiff.scripts.generate_diff import generate_diff
 
 def parser_function():
     parser = argparse.ArgumentParser(
-        description='Compare two configuration files and display their differences.'
+        description="""Compare two configuration files 
+        and display their differences."""
     )
     parser.add_argument('first_file')
     parser.add_argument('second_file')
