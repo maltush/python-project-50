@@ -35,18 +35,13 @@ jobs:
           make lint
 
 
-      - name: Test & publish code coverage
-        run: |
-          # First, run your tests to generate coverage.xml
-          make test-coverage
+      - name: Run tests and generate coverage
+        run: uv run pytest --cov=gendiff --cov-report=xml
 
-          # Download the NEW CodeClimate uploader
-          curl -L https://codeclimate.com/downloads/cc-reporter/cc-reporter > ./cc-reporter
-          chmod +x ./cc-reporter
-
-          # Format and upload coverage
-          ./cc-reporter format-coverage -t coverage.py coverage.xml
-          ./cc-reporter upload-coverage
+      - name: Upload coverage to CodeClimate
+        uses: codeclimate/test-reporter-action@v1
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageLocations: "./coverage.xml:coverage.py"
         
