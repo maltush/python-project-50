@@ -11,7 +11,6 @@ def format_value(value):
     for data_type, handler in type_handlers.items():
         if isinstance(value, data_type):
             return handler(value)
-
     return str(value)
 
 
