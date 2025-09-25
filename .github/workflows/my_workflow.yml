@@ -24,6 +24,12 @@ jobs:
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.coverage.exclusions=tests/**
             -Dsonar.exclusions=tests/**
+      # Install uv (fast Python installer from Astral)
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true  # Optional: caches dependencies for faster runs
+          
       - name: Run linter and pytest
         run: |
           make lint
