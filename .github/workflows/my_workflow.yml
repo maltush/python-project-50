@@ -36,9 +36,11 @@ jobs:
 
 
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v9.0.0
+        run: |
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+              ./cc-test-reporter format-coverage -t coverage.py coverage.xml
+              ./cc-test-reporter upload-coverage
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
-          debug: true
+        
