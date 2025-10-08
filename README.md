@@ -20,8 +20,8 @@
 from gendiff import generate_diff
 
 diff = generate_diff('file1.json', 'file2.json')
-print(diff)```
-
+print(diff)
+```
 
 
 [![asciicast](https://asciinema.org/a/IIqkeVpc0tD2qAeeWfA2VSADh.svg)](https://asciinema.org/a/IIqkeVpc0tD2qAeeWfA2VSADh)
